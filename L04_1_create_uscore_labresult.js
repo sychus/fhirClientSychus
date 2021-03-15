@@ -3,7 +3,7 @@ const Client = require('fhir-kit-client');
 module.exports = { CreateUSCoreR4LabObservation };
 const Config = require('./config.js');
 const baseUrl = Config.ServerEndpoint();
-const Axios = require('axios');
+// const Axios = require('axios');
 
 const fhirClient = new Client({
   baseUrl: baseUrl,

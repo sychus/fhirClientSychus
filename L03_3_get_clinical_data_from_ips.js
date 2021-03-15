@@ -2,7 +2,6 @@ const Client = require('fhir-kit-client');
 module.exports = { GetIPSMedications, GetIPSImmunizations };
 const Config = require('./config.js');
 const baseUrl = Config.ServerEndpoint();
-const axios = require('axios').default;
 
 const fhirClient = new Client({
    baseUrl: baseUrl,

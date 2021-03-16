@@ -11,7 +11,6 @@ async function ExpandValueSetForCombo(baseUrl, Url, Filter) {
     let Parameters = "url=" + Url
     if (Filter != "") { Parameters = Parameters + "&" + "filter=" + Filter; }
     let FullURL = `${urlFHIREndpoint}/${ResourceClass}/${OperationName}?${Parameters}`;
-    console.log(FullURL);
     try {
         let result = await Axios.get(FullURL);
         let aux = '';
@@ -21,10 +20,8 @@ async function ExpandValueSetForCombo(baseUrl, Url, Filter) {
             });
         }
         if (aux == "") { aux = "Error:ValueSet_Filter_Not_Found"; }
-        console.log('aux: ', aux);
         return aux;
     } catch (err) {
-        console.log('Palo: ', err);
         return err
     }
 
@@ -33,13 +30,13 @@ async function ExpandValueSetForCombo(baseUrl, Url, Filter) {
 
 
 
-async function test() {
-    const url = "http://snomed.info/sct?fhir_vs=isa/73211009";
-    const filter = "Drug-induced diabetes";
-    const c = await ExpandValueSetForCombo(baseUrl, url, filter);
-    return c;
-}
-test();
+// async function test() {
+//     const url = "http://snomed.info/sct?fhir_vs=isa/73211009";
+//     const filter = "Drug-induced diabetes";
+//     const c = await ExpandValueSetForCombo(baseUrl, url, filter);
+//     return c;
+// }
+// test();
 
 
 

@@ -3,7 +3,6 @@ const Client = require('../L04_1_create_uscore_labresult.js');
 const baseUrl = Config.ServerEndpoint();
 const PatientIdentifierSystem = Config.PatientIdentifierSystem();
 const Axios = require('axios');
-const { ConsoleReporter } = require('jasmine');
 describe("L04_1_Create_USCore_LabResult_Tests", function () {
     it("L04_1_T01:Patient Not Found", async function () {
         const PatientIdentifierValue = 'L04_1_T01';
@@ -38,7 +37,6 @@ describe("L04_1_Create_USCore_LabResult_Tests", function () {
             NumericResultValue, NumericResultUCUMUnit, CodedResultSNOMEDCode, CodedResultSNOMEDDisplay);
         //US Core Validation
         const valid = await ValidateUSCoreObservation(baseUrl, result);
-        console.log(valid);
         expect(valid).toEqual("OK");
         //Content Validation
         MyObservation = JSON.parse(result);

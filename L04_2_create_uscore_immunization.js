@@ -60,23 +60,23 @@ async function CreateUSCoreR4Immunization(baseUrl, PatientIdentifierSystem, Pati
     }
 }
 
-async function ValidateUSCoreImmunization(server, resourceText) {
-    var urlFHIREndpoint = server;
-    var ResourceClass = "Immunization";
-    var OperationName = "$validate";
-    var FullURL = urlFHIREndpoint + "/" + ResourceClass + "/" + OperationName;
-    //We call the FHIR endpoint with our parameters
-    let result = await Axios.post(
-        FullURL, resourceText, {
-        headers: {
-            "Content-Type": "application/fhir+json",
-            "Accept": "application/fhir+json"
-        }
-    }
-    );
-    return result.statusText;
+// async function ValidateUSCoreImmunization(server, resourceText) {
+//     var urlFHIREndpoint = server;
+//     var ResourceClass = "Immunization";
+//     var OperationName = "$validate";
+//     var FullURL = urlFHIREndpoint + "/" + ResourceClass + "/" + OperationName;
+//     //We call the FHIR endpoint with our parameters
+//     let result = await Axios.post(
+//         FullURL, resourceText, {
+//         headers: {
+//             "Content-Type": "application/fhir+json",
+//             "Accept": "application/fhir+json"
+//         }
+//     }
+//     );
+//     return result.statusText;
 
-}
+// }
 
 // async function test() {
 //     const PatientIdentifierSystem = Config.PatientIdentifierSystem();

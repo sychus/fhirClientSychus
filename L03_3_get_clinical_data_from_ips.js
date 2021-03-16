@@ -125,15 +125,15 @@ async function GetIPSImmunizations(server, patientidentifiersystem, patientident
 }
 
 
-async function test() {
-   const PatientIdentifierValue = 'L03_3_T04';
-   // const resultadoIPSMedication = await GetIPSMedications(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue);
-   const resultadoIPSImmunization = await GetIPSImmunizations(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue);
-   // console.log(resultadoIPSMedication);
-   // console.log(resultadoIPSImmunization);
-   // return resultado;
-   console.log(resultadoIPSImmunization);
-   return resultadoIPSImmunization;
-}
+// async function test() {
+//    const PatientIdentifierValue = 'L03_3_T04';
+//    // const resultadoIPSMedication = await GetIPSMedications(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue);
+//    const resultadoIPSImmunization = await GetIPSImmunizations(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue);
+//    // console.log(resultadoIPSMedication);
+//    // console.log(resultadoIPSImmunization);
+//    // return resultado;
+//    console.log(resultadoIPSImmunization);
+//    return resultadoIPSImmunization;
+// }
 
-test();
+// test();

@@ -20,7 +20,6 @@ async function CreateUSCoreR4LabObservation(baseUrl, PatientIdentifierSystem, Pa
   const patient = await fhirClient.search({ resourceType: 'Patient', searchParams: { identifier: `${PatientIdentifierSystem}|${PatientIdentifierValue}` } });
 
   if (patient.total > 0) {
-    console.log('entra por paciente');
     const labObservation = {
       "resourceType": "Observation",
       "text": {
@@ -88,7 +87,6 @@ async function CreateUSCoreR4LabObservation(baseUrl, PatientIdentifierSystem, Pa
       labObservation['valueCodeableConcept'] = codeable;
     }
 
-    console.log(labObservation);
     return aux = JSON.stringify(labObservation)
   } else {
     return aux = 'Error:Patient_Not_Found';

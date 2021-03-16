@@ -44,16 +44,15 @@ async function GetImmunizations(server, patientidentifiersystem, patientidentifi
          return 'Error:Patient_Not_Found'
       }
    } catch (err) {
-      console.log('entro por palo?', err);
       return err;
    }
 }
 
-async function test() {
-   const PatientIdentifierValue = 'L03_1_T04';
-   const resultado = await GetImmunizations(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue);
-   return resultado;
-}
+// async function test() {
+//    const PatientIdentifierValue = 'L03_1_T04';
+//    const resultado = await GetImmunizations(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue);
+//    return resultado;
+// }
 
-test();
+// test();
 

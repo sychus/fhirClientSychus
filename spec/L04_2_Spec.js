@@ -46,10 +46,8 @@ describe("L04_2_Create_USCore_Immunization_Tests", function () {
             ReasonCode);
         //US Core Validation
         const valid = await ValidateUSCoreImmunization(baseUrl, result);
-        console.log('Lo que da el valid: ', valid);
         //Content Validation
         MyImmunization = JSON.parse(result);
-        console.log(MyImmunization);
         expect(MyImmunization.status).toEqual(ImmunizationStatusCode);
         expect(MyImmunization.occurrenceDateTime).toEqual(ImmunizationDateTime);
         expect(MyImmunization.vaccineCode.coding[0].code).toEqual(ProductCVXCode);
@@ -78,7 +76,6 @@ describe("L04_2_Create_USCore_Immunization_Tests", function () {
         expect(valid).toEqual("OK");
         //Content Validation
         MyImmunization = JSON.parse(result);
-        console.log(MyImmunization);
         expect(MyImmunization.status).toEqual(ImmunizationStatusCode);
         expect(MyImmunization.occurrenceDateTime).toEqual(ImmunizationDateTime);
         expect(MyImmunization.vaccineCode.coding[0].code).toEqual(ProductCVXCode);

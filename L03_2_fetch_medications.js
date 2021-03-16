@@ -45,16 +45,15 @@ async function GetMedications(server, patientidentifiersystem, patientidentifier
          return 'Error:Patient_Not_Found'
       }
    } catch (err) {
-      console.log('entro por palo?', err);
       return err;
    }
 }
 
-async function test() {
-   const PatientIdentifierValue = 'L03_2_T03';
-   const resultado = await GetMedications(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue);
-   console.log(resultado);
-   return resultado;
-}
+// async function test() {
+//    const PatientIdentifierValue = 'L03_2_T03';
+//    const resultado = await GetMedications(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue);
+//    console.log(resultado);
+//    return resultado;
+// }
 
-test();
+// test();

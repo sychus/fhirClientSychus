@@ -69,12 +69,12 @@ async function GetEthnicity(server, patientidentifiersystem, patientidentifierva
    }
 }
 
-async function test() {
-   const PatientIdentifierValue = 'L02_1_T03';
-   const resultado = await GetEthnicity(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue)
-   console.log(resultado);
-   return resultado;
-}
+// async function test() {
+//    const PatientIdentifierValue = 'L02_1_T03';
+//    const resultado = await GetEthnicity(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue)
+//    console.log(resultado);
+//    return resultado;
+// }
 
-test();
+// test();
 

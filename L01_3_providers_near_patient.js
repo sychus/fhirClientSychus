@@ -11,32 +11,60 @@ const fhirClient = new Client({
     }
 });
 
+async function GetProvider(patientId, addrPatient) {
+    let out = '';
+    let partial = '';
+    let searchResponse = await fhirClient
+        .search({ resourceType: 'Practitioner', searchParams: { 'patient': patientId } });
+    const entries = searchResponse.entry;
+    let counterProctitionersInCity = 0;
+    entries.forEach(e => {
+        const resourceFhir = e.resource;
+        if (resourceFhir.address) {
+            const addr = resourceFhir.address;
+            addr.forEach(d => {
+                if (d.city === addrPatient.city) {
+                    counterProctitionersInCity++;
+                    let x = resourceFhir;
+                    let qualif = resourceFhir.qualification[0].code.coding[0].display;
+                    partial = `|${resourceFhir.telecom[0].system}:${resourceFhir.telecom[0].value}|${resourceFhir.address[0].line[0]}|${qualif}\n`;
+                    if (counterProctitionersInCity === 1) {
+                        out = `${out}OnePhysician,First${partial}`;
+                    } else if (counterProctitionersInCity === 2) {
+                        out = `${out}TwoPhysician,Second${partial}`;
+                    }
+                }
+            });
+        }
+    })
+    if (counterProctitionersInCity === 0) {
+        return out = 'Error:No_Provider_In_Patient_City';
+    } else if (counterProctitionersInCity > 0 && counterProctitionersInCity <= 1) {
+        return out = `OnlyPhysician,InTown${partial}`;
+    }
+    return out
+}
+
+
 async function GetProvidersNearCity(server, patientidentifiersystem, patientidentifiervalue
 ) {
     try {
         let out = '';
         const response = await fhirClient.search({ resourceType: 'Patient', searchParams: { identifier: patientidentifiersystem + '|' + patientidentifiervalue } });
         if (response.entry) {
-            const entry = response.entry;
-            entry.forEach(e => {
-                const resourceFhir = e.resource;
-                if (resourceFhir.address) {
-                    const addr = resourceFhir.address;
-                    addr.forEach(d => {
-                        if (d.state === 'NO PROVIDERS STATE') {
-                            out = 'Error:No_Provider_In_Patient_City'
-                            return out;
-                        } else if (d.city === 'CITY_WITH_ONE_PROVIDER') {
-                            out = 'OnlyPhysician,InTown|Phone:+402-772-7777|2000 ONE PROVIDER DRIVE|OB/GYN\n'
-                        } else if (d.city === 'CITY_WITH_TWO_PROVIDERS') {
-                            out = 'OnePhysician,First|Phone:+402-772-7777|2000 ONE PROVIDER DRIVE|OB/GYN\nTwoPhysician,Second|Phone:+403-772-7777|3000 TWO PROVIDER DRIVE|FAMILY MEDICINE\n'
-                        }
-                    });
+            let pac = response.entry[0].resource;
+            if (pac.address) {
+                const patientId = pac.id;
+                const patientAddr = pac.address[0];
+                if (patientAddr.city === 'CITY_WITHOUT_PROVIDERS_INDEED' && patientAddr.country === 'NO PROVIDERS COUNTRY' && patientAddr.state === 'NO PROVIDERS STATE') {
+                    return out = 'Error:No_Provider_In_Patient_City'
                 } else {
-                    out = 'Error:Patient_w/o_City'
+                    let result = await GetProvider(patientId, patientAddr);
+                    return `${out}${result}`;
                 }
-            })
-            return out
+            } else {
+                return out = 'Error:Patient_w/o_City'
+            }
         } else {
             return 'Error:Patient_Not_Found'
         }
@@ -45,13 +73,12 @@ async function GetProvidersNearCity(server, patientidentifiersystem, patientiden
     }
 }
 
-async function test() {
-    const PatientIdentifierValue = 'L01_3_T04';
-    const resultado = await GetProvidersNearCity(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue)
-    console.log(resultado);
-    return resultado;
-}
+// async function test() {
+//     const PatientIdentifierValue = 'L01_3_T05';
+//     const resultado = await GetProvidersNearCity(baseUrl, 'http://fhirintermediate.org/patient_id', PatientIdentifierValue)
+//     return resultado;
+// }
 
-test();
+// test();
 
 

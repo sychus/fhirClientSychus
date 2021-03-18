@@ -3,7 +3,7 @@ const Client = require('fhir-kit-client');
 module.exports = { CreateUSCoreR4LabObservation };
 const Config = require('./config.js');
 const baseUrl = Config.ServerEndpoint();
-// const Axios = require('axios');
+const Axios = require('axios');
 
 const fhirClient = new Client({
   baseUrl: baseUrl,
@@ -65,8 +65,9 @@ async function CreateUSCoreR4LabObservation(baseUrl, PatientIdentifierSystem, Pa
       labObservation.code.coding.push(snomed);
     }
     if (NumericResultValue) {
+      const resultValue = (ResultType === 'numeric') ? parseFloat(NumericResultValue) : NumericResultValue;
       const quantity = {
-        "value": NumericResultValue,
+        "value": resultValue,
         "unit": NumericResultUCUMUnit,
         "system": "http://unitsofmeasure.org"
       }
@@ -98,7 +99,7 @@ async function CreateUSCoreR4LabObservation(baseUrl, PatientIdentifierSystem, Pa
 //   var ResourceClass = "Observation";
 //   var OperationName = "$validate";
 //   var FullURL = urlFHIREndpoint + "/" + ResourceClass + "/" + OperationName;
-//   //We call the FHIR endpoint with our parameters
+//   We call the FHIR endpoint with our parameters
 //   let result = await Axios.post(
 //     FullURL, resourceText, {
 //     headers: {
@@ -123,13 +124,11 @@ async function CreateUSCoreR4LabObservation(baseUrl, PatientIdentifierSystem, Pa
 //   const ObservationLOINCCode = "1975-2";
 //   const ObservationLOINCDisplay = "Bilirubin, serum";
 //   const ResultType = "numeric";
-//   const NumericResultValue = 8.6;
+//   const NumericResultValue = "8.6";
 //   const NumericResultUCUMUnit = "mg/dl";
 //   const CodedResultSNOMEDCode = "";
 //   const CodedResultSNOMEDDisplay = "";
-//   console.log('aca');
 //   const labOb = await CreateUSCoreR4LabObservation(baseUrl, PatientIdentifierSystem, PatientIdentifierValue, ObservationStatusCode, ObservationDateTime, ObservationLOINCCode, ObservationLOINCDisplay, ResultType, NumericResultValue, NumericResultUCUMUnit, CodedResultSNOMEDCode, CodedResultSNOMEDDisplay);
-//   console.log('antes de validar');
 //   const resultado = await ValidateUSCoreObservation(baseUrl, labOb);
 //   console.log(resultado);
 //   return labOb;

@@ -28,7 +28,7 @@ describe("L04_1_Create_USCore_LabResult_Tests", function () {
         const ObservationLOINCCode = "1975-2";
         const ObservationLOINCDisplay = "Bilirubin, serum";
         const ResultType = "numeric";
-        const NumericResultValue = 8.6;
+        const NumericResultValue = "8.6";
         const NumericResultUCUMUnit = "mg/dl";
         const CodedResultSNOMEDCode = "";
         const CodedResultSNOMEDDisplay = "";
@@ -42,7 +42,7 @@ describe("L04_1_Create_USCore_LabResult_Tests", function () {
         MyObservation = JSON.parse(result);
         expect(MyObservation.status).toEqual(ObservationStatusCode);
         expect(MyObservation.effectiveDateTime).toEqual(ObservationDateTime);
-        expect(MyObservation.valueQuantity.value).toEqual(NumericResultValue);
+        expect(MyObservation.valueQuantity.value).toEqual(parseFloat(NumericResultValue));
         expect(MyObservation.valueQuantity.unit).toEqual(NumericResultUCUMUnit);
         expect(MyObservation.code.coding[0].code).toEqual(ObservationLOINCCode);
 

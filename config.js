@@ -2,7 +2,7 @@ const ServerEndpoint = () => {
     return 'http://wildfhir4.aegis.net/fhir4-0-0'
 }
 const TerminologyServerEndpoint = () => {
-    return "http://snowstorm.ihtsdotools.org/fhir";
+    return "https://snowstorm.ihtsdotools.org/fhir";
 }
 const AssignmentSubmissionFHIRServer = () => {
     return "http://fhir.hl7fundamentals.org/r4";

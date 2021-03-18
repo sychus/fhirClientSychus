@@ -24,6 +24,10 @@ async function CreateUSCoreR4Immunization(baseUrl, PatientIdentifierSystem, Pati
         {
             "resourceType": "Immunization",
             "id": "imm-1",
+            "text": {
+                "status": "generated",
+                "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><p></p><p><b>category</b>: <span title=\"Codes: {http://terminology.hl7.org/CodeSystem/observation-category laboratory}\">Laboratory</span></p><p><b>code</b>: <span title=\"Codes: {http://loinc.org 2339-0}\">Glucose Bld-mCnc</span></p><p><b>subject</b>: <a href=\"Patient-example.html\">Amy Shaw. Generated Summary: Medical Record Number: 1032702 (USUAL); active; Amy V. Shaw , Amy V. Baxter ; Phone: 555-555-5555, amy.shaw@example.com; gender: female; birthDate: 1987-02-20</a></p><p><b>effective</b>: 2005-07-05</p><p><b>value</b>: 76.0 mg/dL</p><h3>ReferenceRanges</h3><table class=\"grid\"><tr><td>-</td><td><b>Low</b></td><td><b>High</b></td><td><b>AppliesTo</b></td></tr><tr><td>*</td><td>40.0 mg/dL</td><td>109.0 mg/dL</td><td><span title=\"Codes: {http://terminology.hl7.org/CodeSystem/referencerange-meaning normal}\">Normal Range</span></td></tr></table></div>"
+            },
             "status": ImmunizationStatusCode,
             "vaccineCode": {
                 "coding": []
